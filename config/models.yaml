@@ -1,0 +1,39 @@
+# ML Model Configuration
+
+# Model artifact paths (relative to backend/models/artifacts/)
+models:
+  regime_model:
+    artifact: "regime_model_v1.pkl"
+    version: "v1"
+    description: "Classifies market regime (TREND/RANGE/NO_TRADE)"
+
+  edge_model:
+    artifact: "edge_model_v1.pkl"
+    version: "v1"
+    description: "Predicts probability p of winning trade"
+
+  risk_model:
+    artifact: "risk_model_v1.pkl"
+    version: "v1"
+    optional: true
+    description: "Optional dynamic risk parameter adjustments"
+
+  friction_model:
+    artifact: "friction_model_v1.pkl"
+    version: "v1"
+    description: "Predicts effective friction F from order size, liquidity, volatility"
+
+# Model loading settings
+loading:
+  cache: true
+  lazy: false  # Load all models at startup if false
+
+# Feature engineering settings
+features:
+  lookback_periods: 100  # Number of historical candles for features
+  indicators:
+    - "sma_20"
+    - "sma_50"
+    - "rsi"
+    - "atr"
+    - "volatility"

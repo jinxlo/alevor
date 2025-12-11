@@ -1,0 +1,27 @@
+mode: "live"
+chain_id: 137  # Polygon mainnet
+
+rpc:
+  url: "${RPC_URL_LIVE}"
+  timeout: 30
+
+contracts:
+  vault: "${VAULT_ADDRESS}"
+  trader: "${TRADER_ADDRESS}"
+  treasury: "${TREASURY_ADDRESS}"
+  liquidity_engine: "${LIQUIDITY_ENGINE_ADDRESS}"
+  alv_token: "${ALV_TOKEN_ADDRESS}"
+  dex_router: "${DEX_ROUTER_ADDRESS}"
+
+wallet:
+  trader_key: "${PRIVATE_KEY_TRADER}"
+  protocol_wallet: "${PROTOCOL_WALLET}"
+
+gas:
+  strategy: "standard"  # standard, fast, slow
+  max_fee_per_gas: null  # null = auto
+  max_priority_fee_per_gas: null  # null = auto
+
+logging:
+  level: "INFO"
+  db_url: "${DB_URL}"

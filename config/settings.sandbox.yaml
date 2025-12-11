@@ -1,0 +1,33 @@
+mode: "sandbox"
+chain_id: 80001  # Mumbai testnet
+
+rpc:
+  url: "${RPC_URL_SANDBOX}"
+  timeout: 30
+
+contracts:
+  vault: "${VAULT_ADDRESS}"
+  trader: "${TRADER_ADDRESS}"
+  treasury: "${TREASURY_ADDRESS}"
+  liquidity_engine: "${LIQUIDITY_ENGINE_ADDRESS}"
+  alv_token: "${ALV_TOKEN_ADDRESS}"
+  dex_router: "${DEX_ROUTER_ADDRESS}"
+
+wallet:
+  trader_key: "${PRIVATE_KEY_TRADER}"
+  protocol_wallet: "${PROTOCOL_WALLET}"
+
+gas:
+  strategy: "standard"
+  max_fee_per_gas: null
+  max_priority_fee_per_gas: null
+
+logging:
+  level: "DEBUG"
+  db_url: "${DB_URL}"
+
+# Sandbox-specific settings
+sandbox:
+  initial_balance: 100000.0  # USDC
+  use_real_prices: true  # Use live prices but don't execute on-chain
+  simulate_slippage: true

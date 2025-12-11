@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: alevor
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-alevor}
+      POSTGRES_DB: alevor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alevor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.backend
+    environment:
+      DB_URL: postgresql://alevor:${DB_PASSWORD:-alevor}@db:5432/alevor
+      RPC_URL_LIVE: ${RPC_URL_LIVE}
+      RPC_URL_SANDBOX: ${RPC_URL_SANDBOX}
+      PRIVATE_KEY_TRADER: ${PRIVATE_KEY_TRADER}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    volumes:
+      - ../backend:/app/backend
+      - ../config:/app/config
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python -m backend.engine_live.main_loop
+
+volumes:
+  postgres_data:
+

@@ -1,0 +1,53 @@
+# LLM Configuration
+
+provider: "openai"  # openai, anthropic, etc.
+
+# API Configuration
+api:
+  key: "${OPENAI_API_KEY}"
+  base_url: null  # null = use default
+  timeout: 60
+  max_retries: 3
+
+# Model assignments
+models:
+  reporting:
+    id: "gpt-4"
+    temperature: 0.7
+    max_tokens: 2000
+
+  risk:
+    id: "gpt-4"
+    temperature: 0.3
+    max_tokens: 1500
+
+  explainer:
+    id: "gpt-3.5-turbo"
+    temperature: 0.5
+    max_tokens: 1000
+
+  research:
+    id: "gpt-4"
+    temperature: 0.6
+    max_tokens: 1500
+
+# Routing rules
+routing:
+  default_model: "gpt-3.5-turbo"
+  fallback_model: "gpt-3.5-turbo"
+
+# Prompt templates (paths relative to backend/llm_layer/prompts/)
+prompts:
+  reporting: "reporting_prompt.md"
+  risk: "risk_prompt.md"
+  explainer: "explainer_prompt.md"
+
+# Service settings
+services:
+  reporting:
+    schedule: "daily"  # daily, weekly, manual
+    time: "00:00"  # UTC
+
+  oversight:
+    check_interval: 3600  # seconds
+    alert_threshold: 0.05  # Alert if drawdown > 5%

@@ -1,0 +1,43 @@
+# Tradable Pairs Configuration
+
+pairs:
+  - symbol: "MATIC/USDC"
+    base: "MATIC"
+    quote: "USDC"
+    dex:
+      pool_address: "0x0000000000000000000000000000000000000000"  # Set after pool creation
+      fee_tier: 3000  # 0.3% (Uniswap V3 style)
+      router: "${DEX_ROUTER_ADDRESS}"
+    liquidity:
+      min_usd: 100000  # Minimum liquidity in USD
+    enabled: true
+
+  - symbol: "ETH/USDC"
+    base: "ETH"
+    quote: "USDC"
+    dex:
+      pool_address: "0x0000000000000000000000000000000000000000"
+      fee_tier: 3000
+      router: "${DEX_ROUTER_ADDRESS}"
+    liquidity:
+      min_usd: 500000
+    enabled: true
+
+  # Add more pairs as needed
+  # - symbol: "WBTC/USDC"
+  #   base: "WBTC"
+  #   quote: "USDC"
+  #   dex:
+  #     pool_address: "0x0000000000000000000000000000000000000000"
+  #     fee_tier: 3000
+  #     router: "${DEX_ROUTER_ADDRESS}"
+  #   liquidity:
+  #     min_usd: 500000
+  #   enabled: true
+
+# Token addresses (for reference)
+tokens:
+  MATIC: "0x0000000000000000000000000000000000001010"  # Native MATIC
+  USDC: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"  # Polygon USDC
+  ETH: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619"   # Wrapped ETH on Polygon
+  WBTC: "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6"  # Wrapped BTC on Polygon
